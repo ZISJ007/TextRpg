@@ -1,4 +1,4 @@
-﻿using Game;
+using Game;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,15 +24,17 @@ namespace Game
         public double Hp { get; set; }
         public int Gold { get; set; }
         public List<Item> Inventory { get; set; }  // 플레이어가 가진 아이템 목록
-        // 공통 초기화 메서드
+        public bool EquipItem { get; set; }
+        public bool UnEquipItem { get; set; }
         private void InitStats() //초기화
         {
             Level = 1;
             Str = 10;
             Def = 5;
             Hp = 100;
-            Gold = 10000;
+            Gold = 1000;
             Inventory = new List<Item>();
+ 
         }
         public PlayerData(string playerName) // playerJob을 받기 전으로 string playerName만 존재하여 저장
         {
@@ -44,7 +46,7 @@ namespace Game
             Name = playerName;
             Job = (JobType)InputJob;
             InitStats();
-            
+       
 
 
 
