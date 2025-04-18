@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
@@ -30,7 +30,7 @@ namespace Game
         public static void ChoiceName()
         {
 
-            Console.WriteLine("원하시는 이름을 설정해주세요");
+            Console.Write("원하시는 이름을 설정해주세요\n>> ");
 
             while (true)
             {
@@ -40,9 +40,7 @@ namespace Game
                 if (string.IsNullOrEmpty(playerName)) //비어있다면 
                 {
                     Console.WriteLine("잘못된 이름입니다.");
-                    Console.WriteLine("이름을 다시 입력해주세요");
-                    Thread.Sleep(500);  // 500 밀리초, 즉 0.5초 동안 대기
-
+                    Console.Write("이름을 다시 입력해주세요\n>> ");
                 }
                 else
                 {
@@ -59,26 +57,28 @@ namespace Game
                 if (InputHandler == 1)
                 {
                     Console.WriteLine("{0}님 환영합니다", playerData.Name);
+                    Thread.Sleep(1000);
                     break;
                 }
                 else if (InputHandler == 2)
                 {
                     Console.WriteLine("이름을 다시 입력해주세요");
+                    Thread.Sleep(500);
                     ChoiceName();
 
                 }
                 else
                 {
-                    Console.WriteLine("올바른 번호를 선택해주세요.");
+                    Console.Write("올바른 번호를 선택해주세요.\n>> ");
                 }
                 break;
             }
         }
         public static void ChoiceJob()
         {
-            Thread.Sleep(1000);
+
             Console.Clear();//기존에 있던 텍스트를 지운다.
-            Console.WriteLine("직업을 선택해주세요 [ 1. 전사 | 2. 법사 | 3. 궁수 ]");
+            Console.Write("직업을 선택해주세요 [ 1. 전사 | 2. 법사 | 3. 궁수 ]\n>> ");
             while (true)
             {
                 int InputJob = int.Parse(Console.ReadLine());
@@ -100,7 +100,7 @@ namespace Game
 
                     }
 
-                    Console.WriteLine("{0} 시작하시겠습니까?", playerData.Job);
+                    Console.WriteLine("{0}으로 시작하시겠습니까?", playerData.Job);
                     Console.Write("1. 네 | 2. 아니오\n>> ");
                     while (true)
                     {
@@ -108,31 +108,32 @@ namespace Game
                         if (InputHandler == 1)
                         {
                             Console.WriteLine("{0}를 선택했습니다.", playerData.Job);
-                            Thread.Sleep(1000);
+                            Thread.Sleep(500);
                             StartMenu();
                         }
                         else if (InputHandler == 2)
                         {
                             Console.WriteLine("직업을 다시 선택해주세요.");
+                            Thread.Sleep(500);
                             ChoiceJob();
                         }
                         else
                         {
-                            Console.WriteLine("올바른 번호를 선택해주세요.");
+                            Console.Write("올바른 번호를 선택해주세요.\n>> ");
                         }
                     }
 
                 }
                 else
                 {
-                    Console.WriteLine("올바른 직업 번호를 선택해주세요.");
+                    Console.Write("올바른 직업 번호를 선택해주세요.\n>> ");
 
                 }
             }
         }
         public static void StartMenu()
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             Console.Clear();
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
 
@@ -163,20 +164,20 @@ namespace Game
                     }
                     else
                     {
-                        Console.WriteLine("올바른 번호를 입력해주세요");
+                        Console.Write("올바른 번호를 입력해주세요\n>> ");
                     }
                 }
                 catch (FormatException) //예외 발생
                 {
                     //Console.Clear();//기존에 있던 텍스트를 지운다.
-                    Console.WriteLine("올바른 번호를 입력해주세요");
+                    Console.Write("올바른 번호를 입력해주세요\n>> ");
                 }
 
             }
         }
         public static void CharacterStatus()
         {
-            Thread.Sleep(1000);// 로딩 시간처럼 구현
+            Thread.Sleep(500);// 로딩 시간처럼 구현
             Console.Clear();
             Console.WriteLine("==캐릭터 정보==\n");
             Console.WriteLine("Lv.{0}", playerData.Level);
@@ -198,7 +199,7 @@ namespace Game
                 }
                 else
                 {
-                    Console.WriteLine("올바른 번호를 입력해주세요\n");
+                    Console.Write("올바른 번호를 입력해주세요\n>> ");
 
                 }
             }
@@ -232,20 +233,20 @@ namespace Game
                 }
                 else if (InputHandler == 1)
                 {
-                    //장착
+                    EquipItem();
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("올바른 번호를 입력해주세요\n");
+                    Console.Write("올바른 번호를 입력해주세요\n>> ");
                 }
             }
         }
         public static void SpartaShop()
         {
-            Thread.Sleep(1000); // 로딩 시간처럼 구현
+            Thread.Sleep(500);
             Console.Clear();
-            Console.WriteLine("[보유 골드]\n{0} G\n", playerData.Gold);
+            Console.WriteLine("\n[보유 골드]\n{0} G\n", playerData.Gold);
             Console.WriteLine("[아이템 목록]\n");
 
             // 아이템 목록 출력
@@ -254,7 +255,7 @@ namespace Game
                 string priceOrPurchased = shopItem.Items[i].PurchaseItem ? " - 구매 완료" : $"{shopItem.Items[i].Price}G";
                 Console.WriteLine($"{i + 1}. {shopItem.Items[i].ItemName} | {shopItem.Items[i].ToolTip} {priceOrPurchased}");
             }
-
+            Console.WriteLine("");
             Console.WriteLine("1. 아이템 구매");
             Console.WriteLine("0. 나가기\n");
             Console.Write("원하시는 행동을 입력해주세요.\n>> ");
@@ -273,7 +274,7 @@ namespace Game
                 }
                 else
                 {
-                    Console.WriteLine("올바른 번호를 입력해주세요\n");
+                    Console.Write("올바른 번호를 입력해주세요\n>> ");
                 }
             }
         }
@@ -283,7 +284,7 @@ namespace Game
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("\n아이템을 구매하시겠습니까?\n");
+                Console.WriteLine("아이템을 구매하시겠습니까?\n");
                 Console.WriteLine("[보유 골드]");
                 Console.WriteLine("{0}G\n", playerData.Gold);
 
@@ -294,13 +295,13 @@ namespace Game
                     Console.WriteLine($"{i + 1}. {shopItem.Items[i].ItemName} | {shopItem.Items[i].ToolTip} {priceOrPurchased}");
                 }
 
-                Console.WriteLine("\n구매하실 아이템의 번호를 입력하세요. \n 0. 구매 취소");
+                Console.Write("\n- 구매하실 아이템의 번호를 입력하세요. \n0. 구매 취소\n>> ");
 
                 if (int.TryParse(Console.ReadLine(), out int itemInput) && itemInput > 0 && itemInput <= shopItem.Items.Count)
                 {
                     Item selectedItem = shopItem.Items[itemInput - 1]; // 선택된 아이템
 
-                    if (selectedItem.PurchaseItem)
+                    if (selectedItem.PurchaseItem) //(selectedItem.PurchaseItem == true) 2개 다 실행했을 때 텍스트 출력이 안됩니다.
                     {
                         Console.WriteLine("이미 구매한 아이템입니다.\n");
                     }
@@ -316,7 +317,7 @@ namespace Game
                     }
                     else
                     {
-                        Console.WriteLine("골드가 부족합니다.\n");
+                        Console.WriteLine("골드가 부족합니다.\n"); // 골드가 부족한 경우 텍스트 출력이 안됩니다.
                     }
                 }
                 else if (itemInput == 0) // 0을 입력하면 구매 취소
@@ -329,9 +330,39 @@ namespace Game
                 }
             }
         }
+        public static void EquipItem()
+        {
+            Console.Clear();
+            Console.WriteLine("[ 인벤토리 아이템 장착 관리 ]\n");
+            if (playerData.Inventory.Count == 0)
+            {
+                Console.WriteLine("보유한 아이템이 없습니다.\n");
+            }
+            else
+            {
+                foreach (var item in playerData.Inventory)
+                {
+                    Console.WriteLine($"{item.ItemName} - {item.ToolTip}");
+                }
+            }
+            Console.Write("\n장착 또는 해제할 아이템 번호를 입력해주세요.\n0. 장착 관리 취소\n>> ");
+            int InputHandler = int.Parse(Console.ReadLine()); ;
+            if (InputHandler == 0)
+            {
+                CharacterInventory();
+                //인벤토리 장착 관리 구현 예정
+            }
+
+
+
+
+
+
+
+        }
+
+
     }
-
-
 }
 
 
